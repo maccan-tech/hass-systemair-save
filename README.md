@@ -78,6 +78,13 @@ Configuration is done in the UI:
 
 If you want to contribute to this please read the [Contribution guidelines](CONTRIBUTING.md).
 
+## License
+
+This integration is licensed under the [MIT License](LICENSE). The vendored
+device library in `custom_components/systemair_save/systemair_save_modbus/`
+is licensed under the Apache License 2.0; see
+[systemair-save-modbus](https://github.com/maccan-tech/systemair-save-modbus).
+
 ---
 
 This custom component is based on the [integration_blueprint template](https://github.com/ludeeus/integration_blueprint).

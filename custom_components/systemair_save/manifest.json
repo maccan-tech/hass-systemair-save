@@ -1,0 +1,13 @@
+{
+  "domain": "systemair_save",
+  "name": "Systemair SAVE",
+  "codeowners": ["@maccan-tech"],
+  "config_flow": true,
+  "documentation": "https://github.com/maccan-tech/hass-systemair-save",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/maccan-tech/hass-systemair-save/issues",
+  "loggers": ["modbus_connection", "tmodbus"],
+  "requirements": ["modbus-connection[tmodbus]==3.2.0"],
+  "version": "0.1.0"
+}

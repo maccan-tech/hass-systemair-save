@@ -1,0 +1,35 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "description": "Set up the Modbus TCP connection to the ventilation unit (directly or through a gateway).",
+                "data": {
+                    "host": "Host",
+                    "port": "Port",
+                    "unit_id": "Modbus unit",
+                    "framer": "Wire framing"
+                },
+                "data_description": {
+                    "host": "Hostname or IP address of the unit or gateway.",
+                    "port": "TCP port of the Modbus endpoint (default 502).",
+                    "unit_id": "The unit's Modbus station address (default 1).",
+                    "framer": "Native Modbus TCP, or RTU over TCP for transparent serial gateways."
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Failed to connect. Check that the ventilation unit is reachable at the given host, port and unit."
+        },
+        "abort": {
+            "already_configured": "This unit is already configured."
+        }
+    },
+    "selector": {
+        "framer": {
+            "options": {
+                "socket": "Modbus TCP",
+                "rtu": "RTU over TCP"
+            }
+        }
+    }
+}

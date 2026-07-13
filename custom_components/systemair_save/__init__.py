@@ -19,7 +19,13 @@ from homeassistant.exceptions import ConfigEntryNotReady
 from modbus_connection import ModbusConnectionError
 from modbus_connection.tmodbus import connect_tcp
 
-from .const import CONF_FRAMER, CONF_UNIT_ID, FRAMER_SOCKET
+from .const import (
+    CONF_FRAMER,
+    CONF_UNIT_ID,
+    CONNECT_TIMEOUT,
+    FRAMER_SOCKET,
+    MESSAGE_SPACING,
+)
 from .coordinator import SystemairSaveCoordinator
 from .data import SystemairSaveData
 from .systemair_save_modbus import SystemairSave
@@ -46,6 +52,8 @@ async def async_setup_entry(
             entry.data[CONF_HOST],
             port=entry.data[CONF_PORT],
             framer=entry.data.get(CONF_FRAMER, FRAMER_SOCKET),
+            timeout=CONNECT_TIMEOUT,
+            message_spacing=MESSAGE_SPACING,
         )
     except ModbusConnectionError as err:
         msg = f"Could not open Modbus connection: {err}"

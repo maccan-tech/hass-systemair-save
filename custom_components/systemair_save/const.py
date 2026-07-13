@@ -19,3 +19,9 @@ DEFAULT_UNIT_ID: Final = 1  # the unit's default Modbus station address
 
 # A ventilation unit changes slowly, but we poll aggressively and fixed.
 SCAN_INTERVAL: Final = timedelta(seconds=30)
+
+# TCP gateways in front of the unit's RS-485 bus are slow and occasionally
+# glitchy: give each request extra headroom and leave a small gap between
+# requests so back-to-back block reads do not overrun the gateway.
+CONNECT_TIMEOUT: Final = 5.0  # seconds per request
+MESSAGE_SPACING: Final = 0.05  # seconds between requests

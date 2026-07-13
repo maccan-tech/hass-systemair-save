@@ -21,6 +21,7 @@ from modbus_connection.tmodbus import connect_tcp
 from .const import (
     CONF_FRAMER,
     CONF_UNIT_ID,
+    CONNECT_TIMEOUT,
     DEFAULT_PORT,
     DEFAULT_UNIT_ID,
     DOMAIN,
@@ -79,6 +80,7 @@ class SystemairSaveConfigFlow(ConfigFlow, domain=DOMAIN):
                 data[CONF_HOST],
                 port=data[CONF_PORT],
                 framer=data[CONF_FRAMER],
+                timeout=CONNECT_TIMEOUT,
             )
         except ModbusError as err:
             LOGGER.warning("Could not open Modbus connection: %s", err)

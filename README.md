@@ -74,6 +74,16 @@ Configuration is done in the UI:
    "RTU over TCP" for a transparent serial gateway.
 1. Enter the unit's Modbus station address (default 1).
 
+## Troubleshooting
+
+Serial-to-Ethernet gateways in front of the unit's RS-485 bus occasionally
+glitch (corrupted frames, dropped responses). The integration absorbs this:
+a failed poll is retried once, and entities keep their last values until
+three polls in a row have failed (about 90 seconds) before being marked
+unavailable. Occasional glitches are logged as warnings
+("Poll failed (n/3 in a row)...") — frequent warnings point to a flaky
+gateway or network path.
+
 ## Contributions are welcome!
 
 If you want to contribute to this please read the [Contribution guidelines](CONTRIBUTING.md).

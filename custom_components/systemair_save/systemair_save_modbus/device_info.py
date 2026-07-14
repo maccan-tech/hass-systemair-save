@@ -9,7 +9,7 @@ been verified so far.
 from __future__ import annotations
 
 from .enums import SystemType
-from .model import SaveComponent, enum
+from .model import SaveComponent, enum, integer
 
 FALLBACK_MODEL = "SAVE ventilation unit"
 
@@ -41,7 +41,40 @@ class DeviceInformation(SaveComponent):
         description="System type select",
     )
 
+    program_version_high = integer(
+        502,
+        signed=False,
+        maker_key="REG_SYSTEM_PROG_V_HIGH",
+        description="Program version, major part",
+    )
+
+    program_version_mid = integer(
+        503,
+        signed=False,
+        maker_key="REG_SYSTEM_PROG_V_MID",
+        description="Program version, middle part",
+    )
+
+    program_version_low = integer(
+        504,
+        signed=False,
+        maker_key="REG_SYSTEM_PROG_V_LOW",
+        description="Program version, minor part",
+    )
+
     @property
     def model(self) -> str:
         """Model name, e.g. 'SAVE VSR 300'."""
         return model_name(self.system_type)
+
+    @property
+    def firmware_version(self) -> str | None:
+        """The controller's program version, e.g. '2.3.1' (None until read)."""
+        parts = (
+            self.program_version_high,
+            self.program_version_mid,
+            self.program_version_low,
+        )
+        if any(part is None for part in parts):
+            return None
+        return ".".join(str(part) for part in parts)

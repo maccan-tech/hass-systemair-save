@@ -32,6 +32,7 @@ class SystemairSaveEntity(CoordinatorEntity[SystemairSaveCoordinator]):
             manufacturer=info.manufacturer,
             model=info.model,
             name=info.model,
+            sw_version=info.firmware_version,
         )
 
     @property

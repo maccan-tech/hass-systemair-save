@@ -39,7 +39,7 @@ REGISTER_RANGES = _reg_ranges(
     (218, 218),  # outdoor air temperature
     (220, 220),  # pre-heater type
     (351, 351),  # rotor state code
-    (501, 501),  # system type
+    (501, 504),  # system type / program version high-mid-low
     (601, 602),  # filter period / filter days
     (751, 751),  # PCU-PB relay outputs
 )

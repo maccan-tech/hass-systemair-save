@@ -22,6 +22,8 @@ integration is being prepared for Home Assistant core.
 | `sensor` | Outdoor air temperature | Fresh air intake (°C) |
 | `sensor` | Temperature setpoint | Supply air temperature setpoint (°C) |
 | `sensor` | Fan speed level | off / low / normal / high |
+| `sensor` | Supply fan speed | Supply air fan speed (rpm) |
+| `sensor` | Extract fan speed | Extract air fan speed (rpm) |
 | `sensor` | Pre-heater type | Installed pre-heater: `none` / `electrical` (diagnostic) |
 | `sensor` | Rotor state | Rotary heat-exchanger state, e.g. `normal`, `rotor_fault_detected`, `summer_mode` (diagnostic) |
 | `sensor` | Filter period | Configured filter replacement period (diagnostic) |

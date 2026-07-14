@@ -17,7 +17,12 @@ from homeassistant.components.sensor import (
     SensorEntityDescription,
     SensorStateClass,
 )
-from homeassistant.const import EntityCategory, UnitOfTemperature, UnitOfTime
+from homeassistant.const import (
+    REVOLUTIONS_PER_MINUTE,
+    EntityCategory,
+    UnitOfTemperature,
+    UnitOfTime,
+)
 
 from .entity import SystemairSaveEntity
 from .systemair_save_modbus import (
@@ -90,6 +95,22 @@ SENSORS: tuple[SystemairSaveSensorDescription, ...] = (
         attribute="fan_speed_level",
         device_class=SensorDeviceClass.ENUM,
         options=_FAN_SPEED_OPTIONS,
+    ),
+    SystemairSaveSensorDescription(
+        key="ventilation_supply_fan_rpm",
+        name="Supply fan speed",
+        component="ventilation",
+        attribute="supply_fan_rpm",
+        native_unit_of_measurement=REVOLUTIONS_PER_MINUTE,
+        state_class=SensorStateClass.MEASUREMENT,
+    ),
+    SystemairSaveSensorDescription(
+        key="ventilation_extract_fan_rpm",
+        name="Extract fan speed",
+        component="ventilation",
+        attribute="extract_fan_rpm",
+        native_unit_of_measurement=REVOLUTIONS_PER_MINUTE,
+        state_class=SensorStateClass.MEASUREMENT,
     ),
     SystemairSaveSensorDescription(
         key="ventilation_preheater_type",

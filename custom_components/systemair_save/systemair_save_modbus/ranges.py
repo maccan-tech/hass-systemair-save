@@ -32,6 +32,7 @@ def _cl_ranges(
 # SAVE VSR 300 (residential SAVE register profile).
 REGISTER_RANGES = _reg_ranges(
     (101, 101),  # fan speed level
+    (111, 112),  # supply / extract fan rpm
     (201, 202),  # heater type / cooler type
     (207, 213),  # setpoint level / resulting setpoint / level temperatures 1-5
     (214, 216),  # supply / extract / exhaust air temperature

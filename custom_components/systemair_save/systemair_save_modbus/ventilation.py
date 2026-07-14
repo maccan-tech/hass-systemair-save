@@ -37,6 +37,22 @@ class Ventilation(SaveComponent):
         description="Fan speed level for both fans",
     )
 
+    supply_fan_rpm = integer(
+        111,
+        signed=False,
+        unit="rpm",
+        maker_key="REG_FAN_SF_RPM",
+        description="Supply air fan speed",
+    )
+
+    extract_fan_rpm = integer(
+        112,
+        signed=False,
+        unit="rpm",
+        maker_key="REG_FAN_EF_RPM",
+        description="Extract air fan speed",
+    )
+
     # NVM-stored configuration values: R/W in the manufacturer list, but
     # deliberately modeled read-only — they describe the installed hardware.
     heater_type = enum(

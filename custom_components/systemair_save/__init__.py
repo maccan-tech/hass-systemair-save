@@ -17,12 +17,11 @@ from typing import TYPE_CHECKING
 from homeassistant.const import CONF_HOST, CONF_PORT, Platform
 from homeassistant.exceptions import ConfigEntryNotReady
 from modbus_connection import ModbusConnectionError
-from modbus_connection.tmodbus import connect_tcp
 
+from .connection import async_connect
 from .const import (
     CONF_FRAMER,
     CONF_UNIT_ID,
-    CONNECT_TIMEOUT,
     FRAMER_SOCKET,
     MESSAGE_SPACING,
 )
@@ -48,11 +47,10 @@ async def async_setup_entry(
 ) -> bool:
     """Set up this integration using UI."""
     try:
-        connection = await connect_tcp(
+        connection = await async_connect(
             entry.data[CONF_HOST],
-            port=entry.data[CONF_PORT],
-            framer=entry.data.get(CONF_FRAMER, FRAMER_SOCKET),
-            timeout=CONNECT_TIMEOUT,
+            entry.data[CONF_PORT],
+            entry.data.get(CONF_FRAMER, FRAMER_SOCKET),
             message_spacing=MESSAGE_SPACING,
         )
     except ModbusConnectionError as err:

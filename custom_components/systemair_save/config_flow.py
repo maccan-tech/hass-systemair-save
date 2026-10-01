@@ -16,12 +16,11 @@ from homeassistant.helpers.selector import (
     SelectSelectorMode,
 )
 from modbus_connection import ModbusError
-from modbus_connection.tmodbus import connect_tcp
 
+from .connection import async_connect
 from .const import (
     CONF_FRAMER,
     CONF_UNIT_ID,
-    CONNECT_TIMEOUT,
     DEFAULT_PORT,
     DEFAULT_UNIT_ID,
     DOMAIN,
@@ -76,11 +75,8 @@ class SystemairSaveConfigFlow(ConfigFlow, domain=DOMAIN):
     async def _async_title(self, data: dict[str, Any]) -> str | None:
         """Probe the unit for the entry title, or None if unreachable."""
         try:
-            connection = await connect_tcp(
-                data[CONF_HOST],
-                port=data[CONF_PORT],
-                framer=data[CONF_FRAMER],
-                timeout=CONNECT_TIMEOUT,
+            connection = await async_connect(
+                data[CONF_HOST], data[CONF_PORT], data[CONF_FRAMER]
             )
         except ModbusError as err:
             LOGGER.warning("Could not open Modbus connection: %s", err)

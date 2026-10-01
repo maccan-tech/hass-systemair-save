@@ -25,3 +25,7 @@ SCAN_INTERVAL: Final = timedelta(seconds=30)
 # requests so back-to-back block reads do not overrun the gateway.
 CONNECT_TIMEOUT: Final = 5.0  # seconds per request
 MESSAGE_SPACING: Final = 0.05  # seconds between requests
+
+# RTU over TCP has no real line speed; 115200 baud keeps the RTU inter-frame
+# gap at its 1.75 ms minimum.
+RTU_SOCKET_BAUDRATE: Final = 115200

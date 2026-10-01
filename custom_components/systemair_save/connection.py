@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 from modbus_connection.tmodbus import connect_serial, connect_tcp
 
-from .const import CONNECT_TIMEOUT, FRAMER_RTU
+from .const import CONNECT_TIMEOUT, FRAMER_RTU, RTU_SOCKET_BAUDRATE
 
 if TYPE_CHECKING:
     from modbus_connection import ModbusConnection
@@ -24,12 +24,15 @@ async def async_connect(
 
     RTU over TCP is a serial line carried on a socket, so modbus-connection
     opens it as a serial link on a socket:// device (``framer=`` on
-    ``connect_tcp`` is deprecated since modbus-connection 4).
+    ``connect_tcp`` is deprecated since modbus-connection 4). A socket has no
+    line speed; the baudrate only sets the RTU inter-frame gap, and 115200
+    keeps it at tmodbus's 1.75 ms floor, as the deprecated path did.
     """
     if framer == FRAMER_RTU:
         address = f"[{host}]" if ":" in host else host
         return await connect_serial(
             f"socket://{address}:{port}",
+            baudrate=RTU_SOCKET_BAUDRATE,
             framer="rtu",
             timeout=CONNECT_TIMEOUT,
             message_spacing=message_spacing,
